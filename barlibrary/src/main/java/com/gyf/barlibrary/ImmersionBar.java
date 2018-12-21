@@ -377,6 +377,17 @@ public class ImmersionBar {
         return immersionBar;
     }
 
+
+    /**
+     * 是否用系统的方式来实现透明状态栏
+     *
+     * @return the immersion bar
+     */
+    public ImmersionBar systemTransparentStatusBar(boolean isSystem) {
+        mBarParams.systemTransparentStatusBar = isSystem;
+        return isSystem ? transparentStatusBar() : this;
+    }
+
     /**
      * 透明状态栏，默认透明
      *
@@ -1731,13 +1742,18 @@ public class ImmersionBar {
         }
         //需要设置这个才能设置状态栏和导航栏颜色
         mWindow.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        //设置状态栏颜色
-        if (mBarParams.statusBarFlag) {
-            mWindow.setStatusBarColor(ColorUtils.blendARGB(mBarParams.statusBarColor,
-                    mBarParams.statusBarColorTransform, mBarParams.statusBarAlpha));
+
+        if (mBarParams.systemTransparentStatusBar && mBarParams.statusBarColor == Color.TRANSPARENT) {
+            mWindow.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         } else {
-            mWindow.setStatusBarColor(ColorUtils.blendARGB(mBarParams.statusBarColor,
-                    Color.TRANSPARENT, mBarParams.statusBarAlpha));
+            //设置状态栏颜色
+            if (mBarParams.statusBarFlag) {
+                mWindow.setStatusBarColor(ColorUtils.blendARGB(mBarParams.statusBarColor,
+                        mBarParams.statusBarColorTransform, mBarParams.statusBarAlpha));
+            } else {
+                mWindow.setStatusBarColor(ColorUtils.blendARGB(mBarParams.statusBarColor,
+                        Color.TRANSPARENT, mBarParams.statusBarAlpha));
+            }
         }
         //设置导航栏颜色
         if (mBarParams.navigationBarEnable) {

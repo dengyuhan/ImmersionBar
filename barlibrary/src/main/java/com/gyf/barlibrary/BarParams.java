@@ -17,6 +17,11 @@ import java.util.Map;
  */
 public class BarParams implements Cloneable {
     /**
+     * 是否用系统的方式来实现透明状态栏
+     */
+    boolean systemTransparentStatusBar = false;
+
+    /**
      * 状态栏颜色
      * The Status bar color.
      */

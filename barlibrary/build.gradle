@@ -23,10 +23,10 @@ dependencies {
 }
 
 publish {
-    userOrg = 'geyifeng'
-    groupId = 'com.gyf.immersionbar'
+    userOrg = 'dengyuhan'
+    groupId = 'com.dyhdyh.support'
     artifactId = 'immersionbar'
     publishVersion = '2.3.3-beta09'
-    desc = 'Android bar management'
-    website = 'https://github.com/gyf-dev/ImmersionBar'
+    desc = '基于gyf-dev/ImmersionBar的扩展版本'
+    website = 'https://github.com/dengyuhan/ImmersionBar/tree/support'
 }
